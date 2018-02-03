@@ -3,4 +3,4 @@ project(sync_select_files C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(sync_select_files main.c)
+add_executable(sync_select_files main.c shr/window_utils.h)

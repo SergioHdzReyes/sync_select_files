@@ -1,26 +1,17 @@
 // Created by Sergio Hernández on 18/01/18.
 
+#include "shr/window_utils.h"
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <ncurses.h>
 #include <form.h>
-
-//  ESTRUCTURA PARA INFORMACION DE LOS BORDES
-typedef struct _win_borders_struct {
-    chtype  ls, rs, ts, bs,
-            tl, tr, bl, br;
-} WIN_BORDER;
-
-//  ESTRUCTURA PARA INFORMACION DE LAS DIMENSIONES DE LA VENTANA
-typedef struct _WIN_struct {
-    int startx, starty;
-    int height, width;
-    WIN_BORDER border;
-} WIN;
+#include <sys/stat.h>
 
 //  DEFINICION DE FUNCIONES
 void init_win_params(WIN *window);
 void create_box(WIN *window, bool clear);
+void add_array_element(char **, int *);
 
 int main() {
     FILE *pf;
@@ -29,6 +20,12 @@ int main() {
     char path[1035];
     FORM *my_form;
     int ch;
+    //  SE GUARDARAN LOS NOMBRES DE LOS ARCHIVOS
+    int array_index = 1;
+    int *pointer_index = &array_index;
+    char** array = malloc(array_index * sizeof(*array));
+    add_array_element(array, pointer_index);
+    array[0] = "Prueba";
 
     initscr();
     cbreak();
@@ -51,6 +48,7 @@ int main() {
 
     //  SE PINTAN LOS NOMBRES DE LOS ARCHIVOS MODIFICADOS
     while (fgets(path, sizeof(path) - 1, pf) != NULL) {
+
         mvprintw(row_increment, 15, "[ ]");
         mvprintw(row_increment, 20, path);
         row_increment += 1;
@@ -59,6 +57,8 @@ int main() {
     char test[100];
     sprintf(test, "************************ Se modificaron en total %d archivos ************************", COLS);
     mvprintw(1, 40, test);
+    refresh();
+    mvprintw(2, 10, "INDEX_: %d, Valor 1: %s", array_index, array[0]);
     refresh();
 
     //  Se pintan los fields
@@ -109,6 +109,21 @@ int main() {
 
     endwin();
     return 0;
+}
+
+void add_array_element(char **array, int *index)
+{
+    (*index)++;
+    array = realloc(array, (*index) * sizeof(array));
+}
+
+//  VERIFICA SI ES UN ARCHIVO REGULAR O UN DIRECTORIO
+int is_regular_file(const char *path)
+{
+    struct stat path_stat;
+    stat(path, &path_stat);
+
+    return S_ISREG(path_stat.st_mode);
 }
 
 void init_win_params(WIN *window)
