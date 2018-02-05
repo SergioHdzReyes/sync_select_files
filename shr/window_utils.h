@@ -9,20 +9,29 @@
 
 #endif //SYNC_SELECT_FILES_WINDOW_UTILS_H
 
-//  ESTRUCTURA PARA INFORMACION DE LOS BORDES
+/**
+ * Estructura para informacion de los bordes de la ventana
+ */
 typedef struct _win_borders_struct {
     chtype  ls, rs, ts, bs,
             tl, tr, bl, br;
 } WIN_BORDER;
 
-//  ESTRUCTURA PARA INFORMACION DE LAS DIMENSIONES DE LA VENTANA
+/**
+ * Estructura para informacion de las dimensiones de la ventana
+ */
 typedef struct _WIN_struct {
     int startx, starty;
     int height, width;
     WIN_BORDER border;
 } WIN;
 
-//  SE INICIALIZAN CARACTERES PARA MARCO DE PANTALLA
+/**
+ * Se inicializan caracteres para el marco de la pantalla
+ *
+ * @param window Estructura de datos de la ventana
+ * @return void
+ */
 void init_win_params(WIN *window)
 {
     window->height = LINES;
@@ -41,7 +50,13 @@ void init_win_params(WIN *window)
     window->border.br = '+';
 }
 
-//  SE CREA MARCO DE VENTANA CON OPCION A LIMPIAR PANTALLA
+/**
+ * Se crea marco de ventana con opcion a limpiar pantalla
+ *
+ * @param window Estructura de datos de la ventana
+ * @param clear True o False para limpiar la pantalla
+ * @return void
+ */
 void create_box(WIN *window, bool clear)
 {
     int i, j;
