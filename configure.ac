@@ -1,0 +1,30 @@
+AC_INIT([sync-select-files],
+[0.1],
+[sergio.hdzreyes@gmail.com],
+[Sync Select Files],
+[https://github.com/SergioHdzReyes/sync_select_files])
+
+dnl Version minima de Autoconf requerida
+AC_PREREQ([2.69])
+
+AC_CONFIG_SRCDIR([src/sync_select_files.c])
+
+AC_PROG_CC
+
+# Checks for libraries.
+
+# Checks for header files.
+AC_CHECK_HEADERS([memory.h stdlib.h])
+
+# Checks for typedefs, structures, and compiler characteristics.
+AC_CHECK_HEADER_STDBOOL
+AC_TYPE_SIZE_T
+AC_TYPE_SSIZE_T
+
+# Checks for library functions.
+AC_FUNC_MALLOC
+AC_FUNC_REALLOC
+
+AC_CONFIG_FILES([Makefile])
+
+AC_OUTPUT

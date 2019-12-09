@@ -1,7 +1,7 @@
 // Created by Sergio Hernández on 18/01/18.
 
-#include "shr/window_utils.h"
-#include "shr/general_utils.h"
+#include "window_utils.h"
+#include "general_utils.h"
 #include <form.h>
 
 int main() {
