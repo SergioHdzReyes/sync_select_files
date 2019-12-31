@@ -4,6 +4,15 @@ AC_INIT([sync-select-files],
 [Sync Select Files],
 [https://github.com/SergioHdzReyes/sync_select_files])
 
+dnl Must come before AM_INIT_AUTOMAKE.
+AC_CONFIG_AUX_DIR([build-aux])
+AM_INIT_AUTOMAKE([
+	1.11.1
+	readme-alpha
+	subdir-objects
+	-Wall -Werror
+])
+
 dnl Version minima de Autoconf requerida
 AC_PREREQ([2.69])
 
@@ -25,6 +34,9 @@ AC_TYPE_SSIZE_T
 AC_FUNC_MALLOC
 AC_FUNC_REALLOC
 
-AC_CONFIG_FILES([Makefile])
+AC_CONFIG_FILES([
+Makefile
+src/Makefile
+])
 
 AC_OUTPUT
