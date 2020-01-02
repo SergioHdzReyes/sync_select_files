@@ -1,0 +1,5 @@
+#!/bin/bash
+# Se inicializa la configuracion del sistema
+
+set -e -x
+exec autoreconf -vfi

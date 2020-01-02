@@ -4,3 +4,13 @@
 /configure
 /config.log
 /config.status
+/Makefile
+/Makefile.in
+/*.o
+/aclocal.m4
+/build-aux
+
+# src
+/src/Makefile
+/src/Makefile.in
+/src/*.o
