@@ -9,8 +9,12 @@
 /*.o
 /aclocal.m4
 /build-aux
+/stamp-h1
+/m4/
+/config.in
 
 # src
 /src/Makefile
 /src/Makefile.in
 /src/*.o
+/src/.deps/

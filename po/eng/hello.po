@@ -1,0 +1,23 @@
+# English translations for Sync Select Files package.
+# Copyright (C) 2020 Free Software Foundation, Inc.
+# This file is distributed under the same license as the Sync Select Files package.
+# Sergio Hernández <sergioreyes_90290@hotmail.com>, 2020.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Sync Select Files 0.1\n"
+"Report-Msgid-Bugs-To: sergio.hdzreyes@gmail.com\n"
+"POT-Creation-Date: 2020-01-04 16:05-0600\n"
+"PO-Revision-Date: 2020-01-04 16:54-0600\n"
+"Last-Translator: Sergio Hernández <sergioreyes_90290@hotmail.com>\n"
+"Language-Team: English\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: src/main.c:17
+#, c-format
+msgid "hola"
+msgstr "hello"
