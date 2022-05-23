@@ -16,7 +16,7 @@ AM_INIT_AUTOMAKE([
 dnl Version minima de Autoconf requerida
 AC_PREREQ([2.69])
 
-AC_CONFIG_SRCDIR([src/main.c])
+AC_CONFIG_SRCDIR([src/ssf.c])
 
 AC_PROG_CC
 
@@ -38,8 +38,8 @@ AC_TYPE_SIZE_T
 AC_TYPE_SSIZE_T
 
 # Checks for library functions.
-AC_FUNC_MALLOC
-AC_FUNC_REALLOC
+# AC_FUNC_MALLOC
+# AC_FUNC_REALLOC
 
 dnl i18n support from GNU gettext.
 AM_GNU_GETTEXT([external])
