@@ -57,22 +57,36 @@ void parse_options(int argc, char *argv[]) {
 int configuration_init(config_t *cfg, const char *config_file) {
     config_init(cfg);
 
-    if (!check_config_file(cfg, config_file)) {
-        printf(_("An error has ocurred on configuration file reading\n"));
-        exit(1);
-    }
+    check_config_file(cfg, config_file);
 
     return 0;
 }
 
-int check_config_file(config_t *cfg, const char *config_file) {
+void check_config_file(config_t *cfg, const char *config_file) {
+    char *homedir = getenv("HOME");
     char config_path[100] = "";
+    struct stat st = {0};
 
-    strcpy(config_path, "/home/sergio/config/");
+    strcpy(config_path, homedir);
+    strcat(config_path, "/.config");
+
+    if (stat(config_path, &st) == -1) {
+        mkdir(config_path, 0666);
+        printf(_("Directory %s created\n"), config_path);
+    }
+
+    strcat(config_path, "/");
     strcat(config_path, config_file);
 
-    if (!config_read_file(cfg, config_path))
-        return 0;
-    else
-        return 1;
+    if (!config_read_file(cfg, config_path)) {
+        printf(_("Configuration file don't exists!\nCreating it...\n"));
+        int fd = open(config_path, O_RDWR | O_CREAT, 0644);
+
+        if (fd != -1) {
+            close(fd);
+        } else {
+            printf(_("Configuration file cannot be created exiting..."));
+            exit(1);
+        }
+    }
 }

@@ -3,7 +3,7 @@
 int main(int argc, char *argv[]) {
     config_t cfg;
     //config_setting_t *setting;
-    const char *config_file = "config_file.cfg";
+    const char *config_file = "ssf-servers.cfg";
 
     parse_options(argc, argv);
 
