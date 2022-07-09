@@ -4,8 +4,7 @@ struct _win_borders_struct;
 
 struct _WIN_struct;
 
-void init_win_params(WIN *window)
-{
+void init_win_params(WIN *window) {
     window->height = LINES;
     window->width = COLS;
     window->startx = 0;
@@ -22,8 +21,7 @@ void init_win_params(WIN *window)
     window->border.br = '+';
 }
 
-void create_box(WIN *window, bool clear)
-{
+void create_box(WIN *window, bool clear) {
     int i, j;
     int x, y, w, h;
 

@@ -1,14 +1,13 @@
 #include "servers_management.h"
 
-int main (int argc, char *argv[])
-{
-  config_t cfg;
-  //config_setting_t *setting;
-  const char *config_file = "config_file.cfg";
+int main(int argc, char *argv[]) {
+    config_t cfg;
+    //config_setting_t *setting;
+    const char *config_file = "config_file.cfg";
 
-  parse_options(argc, argv);
+    parse_options(argc, argv);
 
-  configuration_init(&cfg, config_file);
-  
-  return EXIT_SUCCESS;
+    configuration_init(&cfg, config_file);
+
+    return EXIT_SUCCESS;
 }

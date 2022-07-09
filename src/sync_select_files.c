@@ -14,7 +14,7 @@ int main() {
     //  SE GUARDARAN LOS NOMBRES DE LOS ARCHIVOS
     int array_index = 1;
     int *pointer_index = &array_index;
-    char** array = malloc(array_index * sizeof(*array));
+    char **array = malloc(array_index * sizeof(*array));
 
     initscr();
     cbreak();

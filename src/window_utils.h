@@ -12,7 +12,7 @@
  * Estructura para informacion de los bordes de la ventana
  */
 typedef struct _win_borders_struct {
-    chtype  ls, rs, ts, bs,
+    chtype ls, rs, ts, bs,
             tl, tr, bl, br;
 } WIN_BORDER;
 

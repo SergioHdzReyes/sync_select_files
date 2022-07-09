@@ -9,7 +9,7 @@
 
 #endif //SYNC_SELECT_FILES_CONFIGURE_HOST_H
 
-void add_host(){
+void add_host() {
     FILE *file_hosts;
     char *line = NULL;
     size_t len = 0;
@@ -31,7 +31,7 @@ void add_host(){
             fputs(line, file_hosts);
         }
     }
-    printf ("Finalizo configuracion!\n\n");
+    printf("Finalizo configuracion!\n\n");
 
     fclose(file_hosts);
 }
