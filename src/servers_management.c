@@ -57,12 +57,12 @@ void parse_options(int argc, char *argv[]) {
 int configuration_init(config_t *cfg, const char *config_file) {
     config_init(cfg);
 
-    check_config_file(cfg, config_file);
+    check_config_file(config_file);
 
     return 0;
 }
 
-void check_config_file(config_t *cfg, const char *config_file) {
+void check_config_file(const char *config_file) {
     char *homedir = getenv("HOME");
     char config_path[100] = "";
     struct stat st = {0};
@@ -78,7 +78,7 @@ void check_config_file(config_t *cfg, const char *config_file) {
     strcat(config_path, "/");
     strcat(config_path, config_file);
 
-    if (!config_read_file(cfg, config_path)) {
+    if (stat(config_path, &st) == -1) {
         printf(_("Configuration file don't exists!\nCreating it...\n"));
         int fd = open(config_path, O_RDWR | O_CREAT, 0644);
 
