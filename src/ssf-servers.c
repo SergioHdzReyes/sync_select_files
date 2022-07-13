@@ -4,10 +4,15 @@ int main(int argc, char *argv[]) {
     config_t cfg;
     //config_setting_t *setting;
     const char *config_file = "ssf-servers.cfg";
+    char *config_file_path;
 
-    configuration_init(&cfg, config_file);
+    configuration_init(&cfg, config_file, &config_file_path);
 
-    parse_options(argc, argv);
+    if (argc > 1) {
+        parse_options(argc, argv);
+    } else {
+        show_servers_list(&cfg, config_file_path);
+    }
 
     return EXIT_SUCCESS;
 }

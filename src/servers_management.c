@@ -54,15 +54,51 @@ void parse_options(int argc, char *argv[]) {
         }
 }
 
-int configuration_init(config_t *cfg, const char *config_file) {
+void show_servers_list(config_t *cfg, char *config_file_path) {
+    if(! config_read_file(cfg, config_file_path))
+    {
+        fprintf(stderr, "%s:%d - %s\n", config_error_file(cfg),
+                config_error_line(cfg), config_error_text(cfg));
+        config_destroy(cfg);
+        exit(1);
+    }
+
+    config_setting_t *setting;
+
+    setting = config_lookup(cfg, "servers");
+    if(setting != NULL)
+    {
+        int count = config_setting_length(setting);
+        int i;
+
+        printf("%-30s  %-30s  %-30s\n", "DOMAIN", "PORT", "PATH");
+
+        for(i = 0; i < count; ++i)
+        {
+            config_setting_t *server = config_setting_get_elem(setting, i);
+            const char *domain, *path;
+            int port;
+
+            if(!(config_setting_lookup_string(server, "domain", &domain)
+                 && config_setting_lookup_string(server, "path", &path)
+                 && config_setting_lookup_int(server, "port", &port)))
+                continue;
+
+            printf("%-31s %-31d %-30s\n", domain, port, path);
+        }
+        putchar('\n');
+    }
+}
+
+int configuration_init(config_t *cfg, const char *config_file, char **config_file_path) {
     config_init(cfg);
 
-    check_config_file(config_file);
+    check_config_file(config_file, config_file_path);
 
     return 0;
 }
 
-void check_config_file(const char *config_file) {
+void check_config_file(const char *config_file, char **config_file_path) {
     char *homedir = getenv("HOME");
     char config_path[100] = "";
     struct stat st = {0};
@@ -89,4 +125,7 @@ void check_config_file(const char *config_file) {
             exit(1);
         }
     }
+
+    *config_file_path = malloc(sizeof(char) * (strlen(config_path) + 1));
+    strcpy(*config_file_path, config_path);
 }
