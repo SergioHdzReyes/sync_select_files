@@ -6,24 +6,35 @@
 #define SYNC_SELECT_FILES_GENERAL_UTILS_H
 
 #include <stdlib.h>
+#include <stdio.h>
 #include <sys/stat.h>
+#include <memory.h>
+
+#include "base.h"
 
 /**
- * Añade un elemento mas al puntero array
+ * Add an element to array
  *
- * @param array Puntero al elemento array en memoria
- * @param index Indice para mantener el tamaño en memoria
+ * @param array Pointer to the array element on memory
+ * @param index Index for maintain size on memory
  * @return void
  */
 void add_array_element(char **array, int *index);
 
 /**
- * Verifica si la ruta dada es un archivo o directorio.
- * El valor devuelto sera true para un archivo regular o false para un directorio.
+ * Verify if the given path is a regular file or directory.
+ * The returned value we'll be true for a regular file or false for a directory.
  *
- * @param path Ruta a analizar
+ * @param path Path to analize
  * @return integer
  */
 int is_regular_file(const char *path);
+
+/**
+ * Process and validate a url string
+ * @param url Url string
+ * @return Struct containing the url fields
+ */
+struct url_struct parse_url(char *url);
 
 #endif //SYNC_SELECT_FILES_GENERAL_UTILS_H
