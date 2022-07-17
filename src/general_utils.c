@@ -15,12 +15,12 @@ int is_regular_file(const char *path) {
 struct url_struct parse_url(char *url) {
     struct url_struct url_parsed;
 
-    char ip[50];
+    char domain[50];
     int port = 80;
     char path[100];
-    sscanf(url, "http://%49[^:]:%99d/%99[^\n]", ip, &port, path);
+    sscanf(url, "%49[^:]:%99d/%99[^\n]", domain, &port, path);
 
-    strcpy(url_parsed.ip, ip);
+    strcpy(url_parsed.domain, domain);
     url_parsed.port = port;
     strcpy(url_parsed.path, path);
 

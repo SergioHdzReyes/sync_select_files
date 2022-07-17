@@ -17,7 +17,7 @@ void print_help() {
     exit(EXIT_SUCCESS);
 }
 
-void parse_options(int argc, char *argv[]) {
+void parse_options(int argc, char *argv[], config_t *cfg, char *config_file_path) {
     int optc;
     enum {
         OPT_HELP,
@@ -25,7 +25,7 @@ void parse_options(int argc, char *argv[]) {
     };
 
     static const struct option longopts[] = {
-            {"add",     no_argument, NULL, 'a'},
+            {"add",     required_argument, NULL, 'a'},
             {"remove",  no_argument, NULL, 'r'},
             {"edit",    no_argument, NULL, 'e'},
             {"help",    no_argument, NULL, OPT_HELP},
@@ -41,7 +41,7 @@ void parse_options(int argc, char *argv[]) {
             case OPT_HELP:
                 print_help();
             case 'a':
-                printf("ADD\n");
+                add_server(cfg, optarg, config_file_path);
                 break;
             case 'r':
                 printf("REMOVE\n");
@@ -71,7 +71,7 @@ void show_servers_list(config_t *cfg, char *config_file_path) {
         int count = config_setting_length(setting);
         int i;
 
-        printf("%-30s  %-30s  %-30s\n", "DOMAIN", "PORT", "PATH");
+        printf("%-30s  %-30s  %-30s  %-30s\n", "No.", "DOMAIN", "PORT", "PATH");
 
         for(i = 0; i < count; ++i)
         {
@@ -84,21 +84,49 @@ void show_servers_list(config_t *cfg, char *config_file_path) {
                  && config_setting_lookup_int(server, "port", &port)))
                 continue;
 
-            printf("%-31s %-31d %-30s\n", domain, port, path);
+            printf("%-31d %-31s %-31d %-30s\n", i + 1, domain, port, path);
         }
         putchar('\n');
     }
 }
 
+void add_server(config_t *cfg, char *url, char *config_file_path) {
+    struct url_struct server_info;
+    config_setting_t  *setting, *root, *server;
+
+    server_info = parse_url(url);
+
+    root = config_root_setting(cfg);
+    setting = config_setting_get_member(root, "servers");
+    server = config_setting_add(setting, NULL, CONFIG_TYPE_GROUP);
+
+    setting = config_setting_add(server, "domain", CONFIG_TYPE_STRING);
+    config_setting_set_string(setting, server_info.domain);
+
+    setting = config_setting_add(server, "port", CONFIG_TYPE_INT);
+    config_setting_set_int(setting, server_info.port);
+
+    setting = config_setting_add(server, "path", CONFIG_TYPE_STRING);
+    config_setting_set_string(setting, server_info.path);
+
+    if(! config_write_file(cfg, config_file_path)) {
+        fprintf(stderr, "Error while writing file.\n");
+        config_destroy(cfg);
+        exit(EXIT_FAILURE);
+    }
+
+    printf(_("Server added successfully\n"));
+}
+
 int configuration_init(config_t *cfg, const char *config_file, char **config_file_path) {
     config_init(cfg);
 
-    check_config_file(config_file, config_file_path);
+    check_config_file(config_file, config_file_path, cfg);
 
     return 0;
 }
 
-void check_config_file(const char *config_file, char **config_file_path) {
+void check_config_file(const char *config_file, char **config_file_path, config_t *cfg) {
     char *homedir = getenv("HOME");
     char config_path[100] = "";
     struct stat st = {0};
@@ -114,7 +142,7 @@ void check_config_file(const char *config_file, char **config_file_path) {
     strcat(config_path, "/");
     strcat(config_path, config_file);
 
-    if (stat(config_path, &st) == -1) {
+    if (!config_read_file(cfg, config_path)) {
         printf(_("Configuration file don't exists!\nCreating it...\n"));
         int fd = open(config_path, O_RDWR | O_CREAT, 0644);
 

@@ -9,10 +9,11 @@ int main(int argc, char *argv[]) {
     configuration_init(&cfg, config_file, &config_file_path);
 
     if (argc > 1) {
-        parse_options(argc, argv);
+        parse_options(argc, argv, &cfg, config_file_path);
     } else {
         show_servers_list(&cfg, config_file_path);
     }
 
+    config_destroy(&cfg);
     return EXIT_SUCCESS;
 }

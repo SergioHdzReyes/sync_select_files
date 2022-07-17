@@ -6,7 +6,7 @@
 #define SYNC_SELECT_FILES_BASE_H
 
 struct url_struct {
-    char ip[50];
+    char domain[50];
     int port;
     char path[100];
 };
