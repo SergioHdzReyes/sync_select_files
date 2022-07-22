@@ -5,11 +5,17 @@
 * **author**    Sergio Hernández <sergio.hdzreyes@gmail.com>
 * **source**    https://github.com/SergioHdzReyes/sync_select_files
 
-## Important
-This program has been proved with the 5.7 version of ncurses library under Linux operating system. You need also to run this program under a GIT project directory.
-
 ## Description
-C program that allows you to select files with changes (based on a git repository) synchronize them with the sync command.
+Program that allows you to deploy your code to a server. If there are differences between both ends, it shows them with a friendly interface.
+
+## Requirements
+This program has been tested on Ubuntu 20 operating system. You need run this program under a GIT project directory and have installed the following tools:
+
+* **Libconfig**
+* **Gettext**
+* **Autoconf**
+* **Make**
+* **Libgit2**
 
 ## Installation
     git clone https://github.com/SergioHdzReyes/sync_select_files.git ~/
