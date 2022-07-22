@@ -18,7 +18,7 @@ void print_help() {
 }
 
 void parse_options(int argc, char *argv[], config_t *cfg, char *config_file_path) {
-    int optc;
+    int optc, item;
     enum {
         OPT_HELP,
         OPT_VERSION
@@ -26,7 +26,7 @@ void parse_options(int argc, char *argv[], config_t *cfg, char *config_file_path
 
     static const struct option longopts[] = {
             {"add",     required_argument, NULL, 'a'},
-            {"remove",  no_argument, NULL, 'r'},
+            {"remove",  required_argument, NULL, 'r'},
             {"edit",    no_argument, NULL, 'e'},
             {"help",    no_argument, NULL, OPT_HELP},
             {"version", no_argument, NULL, OPT_VERSION},
@@ -44,7 +44,8 @@ void parse_options(int argc, char *argv[], config_t *cfg, char *config_file_path
                 add_server(cfg, optarg, config_file_path);
                 break;
             case 'r':
-                printf("REMOVE\n");
+                sscanf(optarg, "%d", &item);
+                remove_server(cfg, item, config_file_path);
                 break;
             case 'e':
                 printf("EDIT\n");
@@ -116,6 +117,31 @@ void add_server(config_t *cfg, char *url, char *config_file_path) {
     }
 
     printf(_("Server added successfully\n"));
+}
+
+void remove_server(config_t *cfg, int item, char *config_file_path) {
+    config_setting_t *setting;
+
+    setting = config_lookup(cfg, "servers");
+    if(setting != NULL) {
+        int count = config_setting_length(setting);
+
+        if (!count) {
+            printf(_("There are not elements to remove."));
+        } else if((item <= 0) || (item > count)) {
+            printf(_("Element not found.\n"));
+        } else {
+            config_setting_remove_elem(setting, --item);
+
+            if(! config_write_file(cfg, config_file_path)) {
+                fprintf(stderr, "Error while writing file.\n");
+                config_destroy(cfg);
+                exit(EXIT_FAILURE);
+            }
+
+            printf(_("Server removed successfully\n"));
+        }
+    }
 }
 
 int configuration_init(config_t *cfg, const char *config_file, char **config_file_path) {

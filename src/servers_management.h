@@ -34,11 +34,21 @@ void parse_options(int argc, char *argv[], config_t *cfg, char *config_file_path
  */
 void show_servers_list(config_t *cfg, char *config_file_path);
 
-/**
- * Add a new server to the config file
- * @param url
- */
+ /**
+  * Add a new server to the config file
+  * @param cfg Structure that contain config file info
+  * @param url Url to save
+  * @param config_file_path Full path of configuration file
+  */
 void add_server(config_t *cfg, char *url, char *config_file_path);
+
+/**
+ * Function that delete a server from config file.
+ * @param cfg Structure that contain config file info
+ * @param item Element to delete
+ * @param config_file_path Full path of configuration file
+ */
+void remove_server(config_t *cfg, int item, char *config_file_path);
 
 /**
  * Initialize all basic information.
