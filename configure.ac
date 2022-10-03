@@ -1,7 +1,7 @@
-AC_INIT([sync-select-files],
+AC_INIT([Sync Select Files],
 [0.1],
 [sergio.hdzreyes@gmail.com],
-[Sync Select Files],
+[sync-select-files],
 [https://github.com/SergioHdzReyes/sync_select_files])
 
 dnl Must come before AM_INIT_AUTOMAKE.
@@ -40,6 +40,9 @@ AC_TYPE_SSIZE_T
 # Checks for library functions.
 # AC_FUNC_MALLOC
 # AC_FUNC_REALLOC
+
+PKG_CHECK_MODULES([GTK], [glib-2.0 gmodule-2.0 gtk+-3.0], , exit)
+PKG_CHECK_MODULES([SOURCEVIEW], [gtksourceview-4], , exit)
 
 dnl i18n support from GNU gettext.
 AM_GNU_GETTEXT([external])
