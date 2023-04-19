@@ -18,12 +18,12 @@ This program has been tested on Ubuntu 20 operating system. You need run this pr
 * **Libgit2**
 
 ## Installation
-    git clone https://github.com/SergioHdzReyes/sync_select_files.git ~/
-    cd ~/sync_select_files/
+    git clone https://github.com/SergioHdzReyes/sync_select_files.git
+    cd sync_select_files/
     ./bootstrap
     ./configure
     make
-    make install
+    sudo make install
 
 ## Usage
 Go to [Wiki](https://github.com/SergioHdzReyes/sync_select_files/wiki).
