@@ -1,5 +1,6 @@
 #!/bin/bash
 # Se inicializa la configuracion del sistema
 
-#set -e -x
-exec autoreconf --verbose --force --install
+echo "Regenerating autotools files"
+autoreconf --verbose --force --install || exit 1
+
