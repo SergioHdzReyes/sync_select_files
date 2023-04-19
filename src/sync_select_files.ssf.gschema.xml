@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema path="/sync_select_files/ssf/" id="sync_select_files.ssf">
+    <key name="font" type="s">
+      <default>'Monospace 12'</default>
+      <summary>Font</summary>
+      <description>The font to be used for content.</description>
+    </key>
+    <key name="highlight-current-line" type="b">
+      <default>false</default>
+      <summary>Highlight the current line</summary>
+      <description></description>
+    </key>
+    <key name="show-line-numbers" type="b">
+      <default>false</default>
+      <summary>Line Number</summary>
+      <description>Display line number in the editor.</description>
+    </key>
+    
+    <key name="auto-indent" type="b">
+      <default>false</default>
+      <summary>Auto indentation</summary>
+      <description>Activate auto-indentation in the editor.</description>
+    </key>
+    <key name="indent-on-tab" type="b">
+      <default>true</default>
+      <summary>Tab key indent code</summary>
+      <description></description>
+    </key>
+    <key name="indent-width" type="i">
+      <default>4</default>
+      <summary>Space size of indent</summary>
+      <description></description>
+    </key>
+    <key name="tab-width" type="u">
+      <default>4</default>
+      <summary>Space size of tab</summary>
+      <description></description>
+    </key>
+  </schema>
+</schemalist>

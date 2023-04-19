@@ -7,6 +7,8 @@
 
 struct _SsfApp {
     GtkApplication parent;
+
+    GSettings * pSettings;
 };
 
 G_DEFINE_TYPE(SsfApp, ssf_app, GTK_TYPE_APPLICATION)
@@ -28,7 +30,13 @@ static void ssf_app_class_init(SsfAppClass *class)
 SsfApp * ssf_app_new (void) {
     SsfApp * pApp = NULL;
 
-    pApp = g_object_new (SSF_APP_TYPE, "application-id", "sync_select_files", "flags", G_APPLICATION_HANDLES_OPEN, NULL);
+    pApp = g_object_new (SSF_APP_TYPE, "application-id", "sync_select_files.ssf", "flags", G_APPLICATION_HANDLES_OPEN, NULL);
+
+    pApp->pSettings = g_settings_new ("sync_select_files.ssf");
 
     return pApp;
+}
+
+GSettings * ssf_app_get_settings (SsfApp * pApp) {
+    return pApp->pSettings;
 }

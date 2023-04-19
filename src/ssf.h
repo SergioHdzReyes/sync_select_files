@@ -9,4 +9,6 @@
 #include <gtksourceview/gtksource.h>
 #include <glib/gi18n.h>
 
+#include "ssf.gresources.h"
+
 #endif //SYNC_SELECT_FILES_SSF_H

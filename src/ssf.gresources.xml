@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/sync_select_files/ssf">
+    <file>ssf.SsfAppWindow.glade</file>
+  </gresource>
+</gresources>
