@@ -35,6 +35,16 @@
                         <property name="use-stock">True</property>
                       </object>
                     </child>
+                    <child>
+                      <object class="GtkMenuItem" id="SelectServerSubmenu">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="tooltip-text" translatable="yes">Select of the server's list.</property>
+                        <property name="label" translatable="yes">Select server</property>
+                        <property name="use-underline">True</property>
+                        <signal name="activate" handler="ssf_select_server_submenu" swapped="no"/>
+                      </object>
+                    </child>
                   </object>
                 </child>
               </object>
