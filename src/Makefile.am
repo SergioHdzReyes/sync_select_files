@@ -13,7 +13,7 @@ ssf_select_server_dialog.c
 
 ssf_servers_LDADD = -lconfig
 ssf_servers_LDFLAGS = -g
-ssf_servers_SOURCES = ssf-servers.c servers_management.c general_utils.c
+ssf_servers_SOURCES = servers.c servers_mgmt.c general_utils.c
 
 ssf.gresources.c: ssf.gresources.xml ssf.AppWindow.glade ssf.ServersManagement.glade ssf.gresources.h
 	$(AM_V_GEN) glib-compile-resources --generate-source $<
