@@ -2,14 +2,16 @@ AM_CFLAGS = $(GTK_CFLAGS) $(SOURCEVIEW_CFLAGS)
 AM_CPPFLAGS = -DLOCALEDIR=\""$(localedir)"\" -rdynamic
 bin_PROGRAMS = ssf ssf-servers
 
-ssf_LDADD = $(GTK_LIBS) $(SOURCEVIEW_LIBS)
+ssf_LDADD = $(GTK_LIBS) $(SOURCEVIEW_LIBS) -lconfig
 ssf_LDFLAGS = -g
 ssf_SOURCES = ssf.gresources.h \
 ssf.gresources.c \
 ssf.c \
 ssf_app.c \
 ssf_window.c \
-ssf_select_server_dialog.c
+ssf_select_server_dialog.c \
+servers_mgmt.c \
+general_utils.c
 
 ssf_servers_LDADD = -lconfig
 ssf_servers_LDFLAGS = -g

@@ -40,7 +40,8 @@ SsfAppWindow * ssf_app_window_new (SsfApp *pApp) {
 
 void ssf_select_server_submenu(GtkMenuItem *menuitem, gpointer user_data) {
     SsfAppWindow * pWindow = SSF_APP_WINDOW(user_data);
+    gtk_widget_hide((GtkWidget *) pWindow);
 
-    pWindow->selectServerDialog = ssf_select_server_dialog_new(pWindow, TRUE);
+    pWindow->selectServerDialog = ssf_select_server_dialog_new(pWindow, TRUE, user_data);
     gtk_window_present(GTK_WINDOW(pWindow->selectServerDialog));
 }

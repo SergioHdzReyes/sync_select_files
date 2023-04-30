@@ -7,7 +7,7 @@
 
 #include <gtk/gtk.h>
 #include <gtksourceview/gtksource.h>
-#include <glib/gi18n.h>
+//#include <glib/gi18n.h>
 
 #include "ssf.gresources.h"
 
