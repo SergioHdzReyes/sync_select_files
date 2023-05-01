@@ -2,7 +2,6 @@
 // Created by sergio on 27/04/23.
 //
 
-#include "servers_mgmt.h"
 #include "ssf_window.h"
 #include "ssf_select_server_dialog.h"
 
@@ -11,6 +10,7 @@ config_t cfg;
 char *config_file_path = NULL;
 struct server_struct servers_list[100];
 short servers_count = 0;
+short selected_server;
 
 GtkWidget *serversRadioBtn[100];
 
@@ -80,6 +80,22 @@ SsfSelectServerDialog * ssf_select_server_dialog_new (SsfAppWindow *pWindow, gbo
 void ssf_select_server_dlg_cancel(GtkButton *cancel_btn, gpointer user_data) {
     SsfSelectServerDialog * pDialog = SSF_SELECT_SERVER_DIALOG(user_data);
     servers_mgmt_end(&cfg);
+
+    gtk_window_close(GTK_WINDOW(pDialog));
+
+    SsfAppWindow * pWindow = SSF_APP_WINDOW(parentData);
+    gtk_widget_show((GtkWidget *) pWindow);
+}
+
+void ssf_select_server_dlg_select(GtkButton *select_btn, gpointer user_data) {
+    SsfSelectServerDialog * pDialog = SSF_SELECT_SERVER_DIALOG(user_data);
+    servers_mgmt_end(&cfg);
+
+    for (int i = 0; i < servers_count; ++i) {
+        if (gtk_toggle_button_get_active((GtkToggleButton *)serversRadioBtn[i])) {
+            selected_server = (short) i;
+        }
+    }
 
     gtk_window_close(GTK_WINDOW(pDialog));
 
