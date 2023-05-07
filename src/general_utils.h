@@ -10,7 +10,11 @@
 #include <sys/stat.h>
 #include <memory.h>
 
-#include "base.h"
+struct url_struct {
+    char domain[50];
+    int port;
+    char path[100];
+};
 
 /**
  * Add an element to array

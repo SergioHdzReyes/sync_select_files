@@ -1,4 +1,4 @@
-#include "servers_mgmt.h"
+#include "libssfservers.h"
 
 char *config_file_path = NULL;
 struct server_struct servers_list[100];
