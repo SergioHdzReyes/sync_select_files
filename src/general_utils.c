@@ -15,9 +15,9 @@ int is_regular_file(const char *path) {
 struct url_struct parse_url(char *url) {
     struct url_struct url_parsed;
 
-    char domain[50];
-    int port = 80;
-    char path[100];
+    char domain[50] = "";
+    int port = 0;
+    char path[100] = "";
     sscanf(url, "%49[^:]:%99d/%99[^\n]", domain, &port, path);
 
     strcpy(url_parsed.domain, domain);
