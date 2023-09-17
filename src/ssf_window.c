@@ -4,12 +4,15 @@
 
 #include "ssf_window.h"
 #include "ssf_select_server_dialog.h"
+#include "ssf_invalid_project_dialog.h"
 
 struct _SsfAppWindow {
     GtkApplicationWindow parent;
 
     GtkNotebook * bookEditors;
     SsfSelectServerDialog *selectServerDialog;
+    SsfInvalidProjectDialog *invalidProjectDialog;
+
 };
 
 G_DEFINE_TYPE(SsfAppWindow, ssf_app_window, GTK_TYPE_APPLICATION_WINDOW);
@@ -20,6 +23,7 @@ static void ssf_app_window_init (SsfAppWindow *pWindow) {
     gtk_widget_init_template(GTK_WIDGET(pWindow));
 
     pWindow->selectServerDialog = NULL;
+    pWindow->invalidProjectDialog = NULL;
 }
 
 static void ssf_app_window_class_init (SsfAppWindowClass *pClass) {
@@ -37,6 +41,15 @@ SsfAppWindow * ssf_app_window_new (SsfApp *pApp) {
 /**
 * SIGNALS
 */
+
+void ssf_check_version_control(GtkWidget *widget, gpointer user_data)
+{
+    SsfAppWindow * pWindow = SSF_APP_WINDOW(user_data);
+    gtk_widget_hide((GtkWidget *) pWindow);
+
+    pWindow->invalidProjectDialog = ssf_invalid_project_dialog_new(pWindow, TRUE);
+    gtk_window_present(GTK_WINDOW(pWindow->invalidProjectDialog));
+}
 
 void ssf_select_server_submenu(GtkMenuItem *menuitem, gpointer user_data) {
     SsfAppWindow * pWindow = SSF_APP_WINDOW(user_data);

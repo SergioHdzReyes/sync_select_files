@@ -17,4 +17,6 @@ extern short selected_server;
 
 SsfAppWindow * ssf_app_window_new (SsfApp *pApp);
 
+void ssf_check_version_control(GtkWidget *widget, gpointer user_data);
+
 #endif //SYNC_SELECT_FILES_SSF_WINDOW_H
