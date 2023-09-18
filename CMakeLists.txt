@@ -21,7 +21,7 @@ string(REPLACE ";" " -I" FLAGS "${FLAGS}")
 set(CMAKE_C_FLAGS ${CMAKE_C_FLAGS} ${GTK3_FLAGS} ${FLAGS})
 
 # Compile
-add_executable(ssf src/ssf.c src/ssf_app.c src/ssf_window.c src/ssf_select_server_dialog.c
+add_executable(ssf src/ssf.c src/ssf_app.c src/ssf_window.c src/ssf_select_server_dialog.c src/ssf_invalid_project_dialog.c
         src/ssf_diff_core.c src/ssf.gresources.c src/libssfservers.c)
 add_executable(ssf-server src/servers.c src/libssfservers.c src/general_utils.c)
 add_executable(ssf-diff src/ssf_diff.c src/ssf_diff_core.c)

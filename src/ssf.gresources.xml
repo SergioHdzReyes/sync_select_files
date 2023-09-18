@@ -3,5 +3,6 @@
   <gresource prefix="/sync_select_files/ssf">
     <file>ssf.AppWindow.glade</file>
     <file>ssf.ServersManagement.glade</file>
+    <file>gui/InvalidProjectDialog.glade</file>
   </gresource>
 </gresources>
