@@ -13,6 +13,8 @@
     <property name="can-focus">False</property>
     <property name="window-position">center</property>
     <property name="type-hint">dialog</property>
+    <signal name="close" handler="ssf_invalid_project_dlg_terminate" swapped="no"/>
+    <signal name="destroy" handler="ssf_invalid_project_dlg_terminate" swapped="no"/>
     <child internal-child="vbox">
       <object class="GtkBox">
         <property name="can-focus">False</property>
@@ -30,7 +32,7 @@
                 <property name="receives-default">True</property>
                 <property name="image">SsfInvalidProjectImage1</property>
                 <property name="always-show-image">True</property>
-                <signal name="clicked" handler="ssf_invalid_project_dlg_accept" swapped="no"/>
+                <signal name="clicked" handler="ssf_invalid_project_dlg_terminate" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">True</property>

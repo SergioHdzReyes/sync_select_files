@@ -11,11 +11,11 @@
 #define SSF_APP_WINDOW_TYPE (ssf_app_window_get_type ())
 G_DECLARE_FINAL_TYPE (SsfAppWindow, ssf_app_window, SSF, APP_WINDOW, GtkApplicationWindow)
 
-#include "servers_mgmt.h"
+#include "libssfservers.h"
 
 extern short selected_server;
 
-SsfAppWindow * ssf_app_window_new (SsfApp *pApp);
+SsfAppWindow * ssf_app_window_new (GApplication *pApp);
 
 void ssf_check_version_control(GtkWidget *widget, gpointer user_data);
 

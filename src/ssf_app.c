@@ -18,7 +18,7 @@ static void ssf_app_init (SsfApp * pApp) {}
 static void ssf_app_activate (GApplication * pApp) {
     SsfAppWindow * pWindow;
 
-    pWindow = ssf_app_window_new(SSF_APP(pApp));
+    pWindow = ssf_app_window_new(pApp);
     gtk_window_present (GTK_WINDOW(pWindow));
 }
 
