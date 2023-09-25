@@ -19,4 +19,6 @@ SsfAppWindow * ssf_app_window_new (GApplication *pApp);
 
 void ssf_check_version_control(GtkWidget *widget, gpointer user_data);
 
+void ssf_process_differences(SsfAppWindow *pWindow);
+
 #endif //SYNC_SELECT_FILES_SSF_WINDOW_H
