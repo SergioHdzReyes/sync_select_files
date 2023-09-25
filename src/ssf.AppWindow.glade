@@ -9,7 +9,6 @@
     <property name="default-height">768</property>
     <property name="icon-name">accessories-text-editor</property>
     <property name="has-resize-grip">True</property>
-    <signal name="show" handler="ssf_check_version_control" swapped="no"/>
     <child>
       <object class="GtkBox" id="SsfContainerBox">
         <property name="visible">True</property>
