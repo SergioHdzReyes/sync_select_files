@@ -31,6 +31,7 @@ void print_help() {
  */
 void parse_options(int argc, char *argv[], config_t *cfg) {
     int optc, item;
+    char *str;
     enum {
         OPT_HELP,
         OPT_VERSION
@@ -45,7 +46,7 @@ void parse_options(int argc, char *argv[], config_t *cfg) {
             {NULL, 0,                NULL, 0}
     };
 
-    while ((optc = getopt_long(argc, argv, "are", longopts, NULL)) != -1)
+    while ((optc = getopt_long(argc, argv, "a:r:e", longopts, NULL)) != -1)
         switch (optc) {
             case OPT_VERSION:
                 //version_etc (stdout, PROGRAM_NAME, PACKAGE_NAME, PACKAGE_VERSION, AUTHORS, (char *) NULL);
@@ -56,7 +57,7 @@ void parse_options(int argc, char *argv[], config_t *cfg) {
                 add_server(cfg, optarg);
                 break;
             case 'r':
-                sscanf(optarg, "%d", &item);
+                item = (int) strtol(optarg, &str, 10);
                 remove_server(cfg, item);
                 break;
             case 'e':
@@ -75,7 +76,7 @@ void show_servers_list() {
 
     for(int i = 0; i < servers_count; ++i)
     {
-        printf("%-31d %-31s %-31d %-30s\n", servers_list[i].index, servers_list[i].domain, servers_list[i].port, servers_list[i].path);
+        printf("%-31d %-31s %-31d %-30s\n", servers_list[i].index+1, servers_list[i].domain, servers_list[i].port, servers_list[i].path);
     }
     putchar('\n');
 }
