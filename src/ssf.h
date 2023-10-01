@@ -6,7 +6,7 @@
 #define SYNC_SELECT_FILES_SSF_H
 
 #include <gtk/gtk.h>
-//#include <gtksourceview/gtksource.h>
+#include <gtksourceview/gtksource.h>
 //#include <glib/gi18n.h>
 
 #include "ssf.gresources.h"
