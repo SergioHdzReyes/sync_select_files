@@ -6,6 +6,7 @@
     <property name="width-request">400</property>
     <property name="height-request">200</property>
     <property name="can-focus">False</property>
+    <property name="title" translatable="yes">Administracion de servidores</property>
     <property name="window-position">center</property>
     <property name="type-hint">dialog</property>
     <signal name="close" handler="ssf_select_server_dlg_cancel" swapped="no"/>
