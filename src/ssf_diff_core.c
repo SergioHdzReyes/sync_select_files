@@ -14,9 +14,12 @@ char filepath[500][100];
 
 short int diff_count;
 
-void ssf_diff_start() {
-    process_command();
-
+int ssf_diff_start() {
+    if (process_command()) {
+        return 1;
+    } else {
+        return 0;
+    }
     int cont = 0;
     /*while (output[cont] != NULL) {
         printf("COUNT: %d, VAR: %s\n", cont, output[cont]);
@@ -28,11 +31,11 @@ void ssf_diff_end() {
 
 }
 
-void process_command() {
+int process_command() {
     FILE *fp;
     char path[1035];
     char cmd[100];
-    char *sync_cmd = "rsync -an --delete . /opt/sync_select_files/ --out-format=\"%o %n\"";
+    char *sync_cmd = "rsync -an --delete --out-format=\"%o %n\" --cvs-exclude . /opt/sync_select_files/";
 
     /* Open the command for reading. */
     sprintf(cmd, "%s", sync_cmd);
@@ -75,4 +78,6 @@ void process_command() {
     }
 
     pclose(fp);
+
+    return 1;
 }

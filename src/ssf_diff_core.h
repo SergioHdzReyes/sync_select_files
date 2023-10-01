@@ -10,11 +10,11 @@ extern char filepath[500][100];
 
 extern short int diff_count;
 
-void ssf_diff_start();
+int ssf_diff_start();
 
 void ssf_diff_finish();
 
-void process_command();
+int process_command();
 
 //void ssf_diff_get_file();
 
