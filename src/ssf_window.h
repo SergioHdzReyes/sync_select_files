@@ -17,8 +17,14 @@ extern short selected_server;
 
 SsfAppWindow * ssf_app_window_new (GApplication *pApp);
 
+void ssf_process_differences(SsfAppWindow *pWindow);
+
 void ssf_check_version_control(GtkWidget *widget, gpointer user_data);
 
-void ssf_process_differences(SsfAppWindow *pWindow);
+void ssf_select_server_submenu(GtkMenuItem *menuitem, gpointer user_data);
+
+void ssf_app_submenu_exit(GtkMenuItem *menuitem, gpointer user_data);
+
+void ssf_row_activated();
 
 #endif //SYNC_SELECT_FILES_SSF_WINDOW_H

@@ -29,6 +29,8 @@ struct _SsfAppWindow {
 
 } AppWindow = {NULL};
 
+GtkListStore *list_store;
+
 G_DEFINE_TYPE(SsfAppWindow, ssf_app_window, GTK_TYPE_APPLICATION_WINDOW);
 
 void ssf_app_window_update_status (SsfAppWindow *pWindow);
@@ -62,7 +64,6 @@ void ssf_process_differences(SsfAppWindow *pWindow) {
         return;
     }
 
-    GtkListStore *list_store;
     GtkTreeIter iter;
     gint i;
     //GtkWidget *checkbox[diff_count];
@@ -126,22 +127,9 @@ void ssf_process_differences(SsfAppWindow *pWindow) {
     gtk_tree_view_append_column((GtkTreeView *) tree_view, select);
 
     gtk_grid_attach(GTK_GRID(pWindow->SsfGridAffectedFiles), tree_view, 0, 0, 1, 1);
-    /* END DiffTools */
 
-//    GtkSourceBuffer *buffer = gtk_source_buffer_new(NULL);
-//
-//    ssf_diff_start();
-//
-//    //ME QUEDE AQUI
-//    gtk_text_buffer_set_text(&buffer->parent_instance, "Codigo de prueba", -1);
-//
-//    pWindow->SsfLocalFileDiff = gtk_source_view_new_with_buffer(buffer);
-//
-//    gtk_source_view_set_show_line_numbers((GtkSourceView *)pWindow->SsfLocalFileDiff, TRUE);
-//    gtk_container_add((GtkContainer *) pWindow->SsfContainerBox, pWindow->SsfLocalFileDiff);
-//
-//    gtk_widget_show_all(pWindow->SsfGridDiffDifferences);
-//    gtk_widget_show_all(pWindow->SsfLocalFileDiff);
+    g_signal_connect(G_OBJECT(tree_view), "row-activated", G_CALLBACK(ssf_row_activated), NULL);
+
     gtk_widget_show_all(pWindow->SsfGridAffectedFiles);
 }
 
@@ -175,4 +163,25 @@ void ssf_select_server_submenu(GtkMenuItem *menuitem, gpointer user_data) {
 void ssf_app_submenu_exit(GtkMenuItem *menuitem, gpointer user_data)
 {
     g_application_quit(AppWindow.app);
+}
+
+void ssf_row_activated(GtkTreeView *tree_view, GtkTreePath *path, GtkTreeViewColumn *column, gpointer user_data)
+{
+    GtkTreeIter iter;
+    gtk_tree_model_get_iter(GTK_TREE_MODEL(list_store), &iter, path);
+
+    GValue value = G_VALUE_INIT;
+    gtk_tree_model_get_value(GTK_TREE_MODEL(list_store), &iter, 1, &value);
+
+    g_print("Filename: %s\n", g_value_get_string(&value));
+    g_value_unset(&value);
+
+    /*GtkSourceBuffer *buffer = gtk_source_buffer_new(NULL);
+    ssf_diff_start();
+    gtk_text_buffer_set_text(&buffer->parent_instance, "Codigo de prueba", -1);
+    pWindow->SsfLocalFileDiff = gtk_source_view_new_with_buffer(buffer);
+    gtk_source_view_set_show_line_numbers((GtkSourceView *)pWindow->SsfLocalFileDiff, TRUE);
+    gtk_container_add((GtkContainer *) pWindow->SsfContainerBox, pWindow->SsfLocalFileDiff);
+    gtk_widget_show_all(pWindow->SsfGridDiffDifferences);
+    gtk_widget_show_all(pWindow->SsfLocalFileDiff);*/
 }

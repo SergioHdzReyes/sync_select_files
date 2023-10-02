@@ -9,4 +9,4 @@ dist_doc_DATA = README
 clean-local:
 	find . -name "*~" -delete
 	find . -name "*#" -delete
-	rm src/diff
+	rm -f src/diff compile ar-lib depcomp install-sh libtool ltmain.sh missing
