@@ -20,7 +20,7 @@ libssfservers.c \
 general_utils.c \
 ssf_diff_core.c
 
-ssf_servers_LDADD = -lconfig
+ssf_servers_LDADD = -lconfig -lintl
 ssf_servers_LDFLAGS = -g
 ssf_servers_SOURCES = servers.c libssfservers.c general_utils.c
 
