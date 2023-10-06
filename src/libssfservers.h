@@ -71,3 +71,7 @@ void srvs_mgmt_end(config_t *cfg);
  * @return void
  */
 void srvs_check_cfg_file(config_t *cfg);
+
+int srvs_config_dir_exists(char *dir);
+
+int srvs_check_empty_list(config_t *cfg);

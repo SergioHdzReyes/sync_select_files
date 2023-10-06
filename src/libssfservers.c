@@ -101,14 +101,9 @@ void srvs_mgmt_end(config_t *cfg) {
 }
 
 void srvs_check_cfg_file(config_t *cfg) {
-    char *homedir = getenv("HOME");
     char config_path[100] = "";
-    struct stat st = {0};
 
-    strcpy(config_path, homedir);
-    strcat(config_path, "/.config");
-
-    if (stat(config_path, &st) == -1) {
+    if (!srvs_config_dir_exists((char *) &config_path)) {
         mkdir(config_path, 0666);
         printf(_("Directory %s created\n"), config_path);
     }
@@ -128,4 +123,51 @@ void srvs_check_cfg_file(config_t *cfg) {
 
     config_file_path = malloc(sizeof(char) * (strlen(config_path) + 1));
     strcpy(config_file_path, config_path);
+}
+
+int srvs_config_dir_exists(char *dir)
+{
+    char *homedir = getenv("HOME");
+    char config_path[100] = "";
+    struct stat st = {0};
+
+    strcpy(config_path, homedir);
+    strcat(config_path, "/.config");
+
+    strcpy(dir, config_path);
+
+    if (stat(config_path, &st) == -1) {
+        return 0;
+    }
+
+    return 1;
+}
+
+int srvs_check_empty_list(config_t *cfg)
+{
+    char config_path[100];
+
+    if (!srvs_config_dir_exists((char *) &config_path)) {
+        return 1;
+    }
+
+    strcat(config_path, "/");
+    strcat(config_path, CONFIG_FILE_NAME);
+
+    if (!config_read_file(cfg, config_path)) {
+        return 1;
+    }
+
+    config_setting_t *setting;
+
+    setting = config_lookup(cfg, "servers");
+    if(setting != NULL)
+    {
+        if (!config_setting_length(setting))
+            return 1;
+    } else {
+        return 1;
+    }
+
+    return 0;
 }
