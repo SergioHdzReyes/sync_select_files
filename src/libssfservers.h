@@ -35,39 +35,39 @@ extern char *config_file_path;
   * @param cfg Structure that contain config file info
   * @param url Url to save
   */
-void add_server(config_t *cfg, char *url);
+void srvs_add_server(config_t *cfg, char *url);
 
 /**
  * Function that delete a server from config file.
  * @param cfg Structure that contain config file info
  * @param item Element to delete
  */
-void remove_server(config_t *cfg, int item);
+void srvs_remove_server(config_t *cfg, int item);
 
 /**
  * Read user config file and populates servers_list[] array structure.
  * @param cfg Structure that contain config file info
  * @return
  */
-void read_servers(config_t *cfg);
+void srvs_read_servers(config_t *cfg);
 
 /**
  * Initialize all basic information.
  * @param cfg Structure that contain config file info
  * @return
  */
-int servers_mgmt_init(config_t *cfg);
+int srvs_mgmt_init(config_t *cfg);
 
 /**
  * Free up data structures and file descriptor related to config file.
  * @param cfg Structure that contain config file info
  * @return
  */
-void servers_mgmt_end(config_t *cfg);
+void srvs_mgmt_end(config_t *cfg);
 
 /**
  * Function that verify if ~/.config/ and ~/.config/config_file.cfg exists, if not, create it.
  * @param cfg Structure that contain config file info
  * @return void
  */
-void check_config_file(config_t *cfg);
+void srvs_check_cfg_file(config_t *cfg);

@@ -44,7 +44,7 @@ static void ssf_select_server_dialog_class_init (SsfSelectServerDialogClass *pCl
 SsfSelectServerDialog * ssf_select_server_dialog_new (SsfAppWindow *pWindow, gboolean breplace, gpointer parent_data) {
     parentData = parent_data;
     SsfSelectServerDialog * pDialog = g_object_new(SSF_SELECT_SERVER_DIALOG_TYPE, "transient-for", pWindow, NULL);
-    servers_mgmt_init(&cfg);
+    srvs_mgmt_init(&cfg);
 
     if (servers_count) {
         GSList *group;
@@ -79,7 +79,7 @@ SsfSelectServerDialog * ssf_select_server_dialog_new (SsfAppWindow *pWindow, gbo
  */
 void ssf_select_server_dlg_cancel(GtkButton *cancel_btn, gpointer user_data) {
     SsfSelectServerDialog * pDialog = SSF_SELECT_SERVER_DIALOG(user_data);
-    servers_mgmt_end(&cfg);
+    srvs_mgmt_end(&cfg);
 
     gtk_window_close(GTK_WINDOW(pDialog));
 
@@ -89,7 +89,7 @@ void ssf_select_server_dlg_cancel(GtkButton *cancel_btn, gpointer user_data) {
 
 void ssf_select_server_dlg_select(GtkButton *select_btn, gpointer user_data) {
     SsfSelectServerDialog * pDialog = SSF_SELECT_SERVER_DIALOG(user_data);
-    servers_mgmt_end(&cfg);
+    srvs_mgmt_end(&cfg);
 
     for (int i = 0; i < servers_count; ++i) {
         if (gtk_toggle_button_get_active((GtkToggleButton *)serversRadioBtn[i])) {

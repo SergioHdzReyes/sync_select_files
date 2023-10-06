@@ -54,11 +54,11 @@ void parse_options(int argc, char *argv[], config_t *cfg) {
             case OPT_HELP:
                 print_help();
             case 'a':
-                add_server(cfg, optarg);
+                srvs_add_server(cfg, optarg);
                 break;
             case 'r':
                 item = (int) strtol(optarg, &str, 10);
-                remove_server(cfg, item);
+                srvs_remove_server(cfg, item);
                 break;
             case 'e':
                 printf("EDIT\n");
@@ -85,7 +85,7 @@ void show_servers_list() {
 int main(int argc, char *argv[]) {
     config_t cfg;
 
-    servers_mgmt_init(&cfg);
+    srvs_mgmt_init(&cfg);
 
     if (argc > 1) {
         parse_options(argc, argv, &cfg);
@@ -93,6 +93,6 @@ int main(int argc, char *argv[]) {
         show_servers_list();
     }
 
-    servers_mgmt_end(&cfg);
+    srvs_mgmt_end(&cfg);
     return EXIT_SUCCESS;
 }

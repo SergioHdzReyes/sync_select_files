@@ -2,7 +2,7 @@
 
 unsigned short fd;
 
-void add_server(config_t *cfg, char *url) {
+void srvs_add_server(config_t *cfg, char *url) {
     struct url_struct server_info;
     config_setting_t  *setting, *root, *server;
 
@@ -30,7 +30,7 @@ void add_server(config_t *cfg, char *url) {
     printf(_("Server added successfully\n"));
 }
 
-void remove_server(config_t *cfg, int item) {
+void srvs_remove_server(config_t *cfg, int item) {
     config_setting_t *setting;
 
     setting = config_lookup(cfg, "servers");
@@ -55,7 +55,7 @@ void remove_server(config_t *cfg, int item) {
     }
 }
 
-void read_servers(config_t *cfg) {
+void srvs_read_servers(config_t *cfg) {
     config_setting_t *setting;
 
     setting = config_lookup(cfg, "servers");
@@ -84,23 +84,23 @@ void read_servers(config_t *cfg) {
     }
 }
 
-int servers_mgmt_init(config_t *cfg) {
+int srvs_mgmt_init(config_t *cfg) {
     config_init(cfg);
 
-    check_config_file(cfg);
+    srvs_check_cfg_file(cfg);
 
-    read_servers(cfg);
+    srvs_read_servers(cfg);
 
     return 0;
 }
 
-void servers_mgmt_end(config_t *cfg) {
+void srvs_mgmt_end(config_t *cfg) {
     config_destroy(cfg);
 
     close(fd);
 }
 
-void check_config_file(config_t *cfg) {
+void srvs_check_cfg_file(config_t *cfg) {
     char *homedir = getenv("HOME");
     char config_path[100] = "";
     struct stat st = {0};
