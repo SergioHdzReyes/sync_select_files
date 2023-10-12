@@ -10,6 +10,9 @@ void srvs_add_server(config_t *cfg, char *url) {
 
     root = config_root_setting(cfg);
     setting = config_setting_get_member(root, "servers");
+    if (!setting)
+        setting = config_setting_add(root, "servers", CONFIG_TYPE_LIST);
+
     server = config_setting_add(setting, NULL, CONFIG_TYPE_GROUP);
 
     setting = config_setting_add(server, "domain", CONFIG_TYPE_STRING);
@@ -112,7 +115,9 @@ void srvs_check_cfg_file(config_t *cfg) {
     strcat(config_path, CONFIG_FILE_NAME);
 
     if (!config_read_file(cfg, config_path)) {
-        printf(_("Configuration file don't exists!\nCreating it...\n"));
+        //printf("ERROR_READING: TEXT=%s, FILE=%s, LINE=%d\n", config_error_text(cfg), config_error_file(cfg), config_error_line(cfg));
+
+        printf(_("Configuration file doesn't exists!\nCreating it...\n"));
         fd = open(config_path, O_RDWR | O_CREAT, 0644);
 
         if (!fd) {
