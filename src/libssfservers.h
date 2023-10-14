@@ -52,6 +52,21 @@ void srvs_remove_server(config_t *cfg, int item);
 void srvs_read_servers(config_t *cfg);
 
 /**
+ * Save the server index selected by the user.
+ * @param cfg Structure that contain config file info
+ * @param selected_server Server index to save
+ * @return
+ */
+void srvs_select_server(config_t *cfg, short selected_server);
+
+/**
+ * Get the index server selected previously by the user.
+ * @param cfg Structure that contain config file info
+ * @return
+ */
+signed char srvs_selected_server(config_t *cfg);
+
+/**
  * Initialize all basic information.
  * @param cfg Structure that contain config file info
  * @return

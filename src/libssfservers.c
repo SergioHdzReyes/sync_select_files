@@ -87,6 +87,38 @@ void srvs_read_servers(config_t *cfg) {
     }
 }
 
+void srvs_select_server(config_t *cfg, short selected_server) {
+    config_setting_t  *setting, *root;
+
+    root = config_root_setting(cfg);
+    setting = config_setting_get_member(root, "selected_server");
+    if (!setting)
+        setting = config_setting_add(root, "selected_server", CONFIG_TYPE_INT);
+
+    config_setting_set_int(setting, selected_server);
+
+    if(! config_write_file(cfg, config_file_path)) {
+        fprintf(stderr, "Error while writing file.\n");
+        config_destroy(cfg);
+        exit(EXIT_FAILURE);
+    }
+}
+
+signed char srvs_selected_server(config_t *cfg) {
+    signed char selected;
+
+    config_setting_t *setting;
+
+    setting = config_lookup(cfg, "selected_server");
+    if (setting == NULL) {
+        selected = -1;
+    } else {
+        selected = (signed char) config_setting_get_int(setting);
+    }
+
+    return selected;
+}
+
 int srvs_mgmt_init(config_t *cfg) {
     config_init(cfg);
 
