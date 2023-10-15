@@ -13,6 +13,9 @@ GLIB_GSETTINGS
 
 PKG_CHECK_MODULES([GTK], [glib-2.0 gmodule-2.0 gtk+-3.0], , exit)
 PKG_CHECK_MODULES([SOURCEVIEW], [gtksourceview-4], , exit)
+PKG_CHECK_MODULES([LIBCONFIG], [libconfig >= 1.5],,
+    AC_MSG_ERROR([libconfig 1.5 or newer not found.])
+)
 
 AC_CONFIG_FILES([
     Makefile
