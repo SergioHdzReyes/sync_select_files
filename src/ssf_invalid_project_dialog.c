@@ -11,7 +11,7 @@ struct _SsfInvalidProjectDialog {
     GApplication *app;
 
     GtkWidget * AcceptBtn;
-} dialog;
+} dialogInvProj;
 
 G_DEFINE_TYPE(SsfInvalidProjectDialog, ssf_invalid_project_dialog, GTK_TYPE_DIALOG);
 
@@ -26,7 +26,7 @@ static void ssf_invalid_project_dialog_class_init (SsfInvalidProjectDialogClass 
 }
 
 SsfInvalidProjectDialog * ssf_invalid_project_dialog_new (SsfAppWindow *pWindow, gboolean breplace, GApplication * gApp) {
-    dialog.app = gApp;
+    dialogInvProj.app = gApp;
     SsfInvalidProjectDialog * pDialog = g_object_new(SSF_INVALID_PROJECT_DIALOG_TYPE, "transient-for", pWindow, NULL);
 
     gtk_widget_show_all((GtkWidget *) pDialog);
@@ -40,5 +40,5 @@ SsfInvalidProjectDialog * ssf_invalid_project_dialog_new (SsfAppWindow *pWindow,
  */
 void ssf_invalid_project_dlg_terminate(GtkButton *accept_btn, gpointer user_data)
 {
-    g_application_quit(dialog.app);
+    g_application_quit(dialogInvProj.app);
 }

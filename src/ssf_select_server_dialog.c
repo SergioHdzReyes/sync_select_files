@@ -18,11 +18,12 @@ struct _SsfSelectServerDialog {
     GtkDialog parent;
 
     SsfAppWindow * pWindow;
+    GApplication *app;
     GtkGrid *SMServersListGrid;
 
     GtkWidget * SMCancelBtn;
     GtkWidget * SMSelectBtn;
-};
+} dialogSelServer;
 
 gpointer *parentData;
 
@@ -41,8 +42,9 @@ static void ssf_select_server_dialog_class_init (SsfSelectServerDialogClass *pCl
     gtk_widget_class_bind_template_child(GTK_WIDGET_CLASS(pClass), SsfSelectServerDialog, SMServersListGrid);
 }
 
-SsfSelectServerDialog * ssf_select_server_dialog_new (SsfAppWindow *pWindow, gboolean breplace, gpointer parent_data) {
-    parentData = parent_data;
+SsfSelectServerDialog * ssf_select_server_dialog_new (SsfAppWindow *pWindow, gboolean breplace, GApplication * gApp) {
+    dialogSelServer.app = gApp;
+    dialogSelServer.pWindow = pWindow;
     SsfSelectServerDialog * pDialog = g_object_new(SSF_SELECT_SERVER_DIALOG_TYPE, "transient-for", pWindow, NULL);
 
     srvs_mgmt_init(&cfg);
@@ -89,8 +91,7 @@ void ssf_select_server_dlg_cancel(GtkButton *cancel_btn, gpointer user_data) {
 
     gtk_window_close(GTK_WINDOW(pDialog));
 
-    SsfAppWindow * pWindow = SSF_APP_WINDOW(parentData);
-    gtk_widget_show((GtkWidget *) pWindow);
+    gtk_widget_show((GtkWidget *) dialogSelServer.pWindow);
 }
 
 void ssf_select_server_dlg_select(GtkButton *select_btn, gpointer user_data) {
@@ -104,9 +105,8 @@ void ssf_select_server_dlg_select(GtkButton *select_btn, gpointer user_data) {
 
     gtk_window_close(GTK_WINDOW(pDialog));
 
-    SsfAppWindow * pWindow = SSF_APP_WINDOW(parentData);
-    gtk_widget_show((GtkWidget *) pWindow);
-
     srvs_select_server(&cfg, selected_server);
     srvs_mgmt_end(&cfg);
+
+    g_application_quit(dialogSelServer.app);
 }

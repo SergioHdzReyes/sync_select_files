@@ -8,7 +8,6 @@ libssfservers_la_CFLAGS = -lconfig
 include_HEADERS = libssfservers.h general_utils.h
 
 ssf_LDADD = $(GTK_LIBS) $(SOURCEVIEW_LIBS) -lconfig
-ssf_LDFLAGS = -g
 ssf_SOURCES = ssf.gresources.h \
 ssf.gresources.c \
 ssf.c \
@@ -21,7 +20,6 @@ general_utils.c \
 ssf_diff_core.c
 
 ssf_servers_LDADD = -lconfig -lintl
-ssf_servers_LDFLAGS = -g
 ssf_servers_SOURCES = servers.c libssfservers.c general_utils.c
 
 ssf.gresources.c: ssf.gresources.xml ssf.AppWindow.glade ssf.ServersManagement.glade gui/InvalidProjectDialog.glade ssf.gresources.h
