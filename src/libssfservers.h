@@ -19,6 +19,7 @@
 
 struct server_struct {
     unsigned short index;
+    char user[50];
     char domain[50];
     unsigned short port;
     char path[100];

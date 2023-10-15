@@ -72,11 +72,11 @@ void parse_options(int argc, char *argv[], config_t *cfg) {
  * Print a servers list to screen
  */
 void show_servers_list() {
-    printf("%-30s  %-30s  %-30s  %-30s\n", "No.", "DOMAIN", "PORT", "PATH");
+    printf("%-30s  %-30s  %-30s  %-30s  %-30s\n", "No.", "USER", "DOMAIN", "PORT", "PATH");
 
     for(int i = 0; i < servers_count; ++i)
     {
-        printf("%-31d %-31s %-31d %-30s\n", servers_list[i].index+1, servers_list[i].domain, servers_list[i].port, servers_list[i].path);
+        printf("%-31d %-31s %-31s %-31d %-30s\n", servers_list[i].index+1, servers_list[i].user, servers_list[i].domain, servers_list[i].port, servers_list[i].path);
     }
     putchar('\n');
 }

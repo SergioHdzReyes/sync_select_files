@@ -15,6 +15,9 @@ void srvs_add_server(config_t *cfg, char *url) {
 
     server = config_setting_add(setting, NULL, CONFIG_TYPE_GROUP);
 
+    setting = config_setting_add(server, "user", CONFIG_TYPE_STRING);
+    config_setting_set_string(setting, server_info.user);
+
     setting = config_setting_add(server, "domain", CONFIG_TYPE_STRING);
     config_setting_set_string(setting, server_info.domain);
 
@@ -70,15 +73,17 @@ void srvs_read_servers(config_t *cfg) {
         for(i = 0; i < count; ++i)
         {
             config_setting_t *server = config_setting_get_elem(setting, i);
-            const char *domain, *path;
+            const char *domain, *path, *user;
             int port;
 
-            if(!(config_setting_lookup_string(server, "domain", &domain)
-                 && config_setting_lookup_string(server, "path", &path)
-                 && config_setting_lookup_int(server, "port", &port)))
+            if(!(config_setting_lookup_string(server, "user", &user)
+                && config_setting_lookup_string(server, "domain", &domain)
+                && config_setting_lookup_string(server, "path", &path)
+                && config_setting_lookup_int(server, "port", &port)))
                 continue;
 
             servers_list[i].index = i;
+            strcpy(servers_list[i].user, user);
             strcpy(servers_list[i].domain, domain);
             servers_list[i].port = port;
             strcpy(servers_list[i].path, path);

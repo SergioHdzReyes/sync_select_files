@@ -11,6 +11,7 @@
 #include <memory.h>
 
 struct url_struct {
+    char user[50];
     char domain[50];
     int port;
     char path[100];
